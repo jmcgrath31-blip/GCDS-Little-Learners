@@ -906,256 +906,176 @@ h2{margin:0 0 5px;font-size:24px;font-weight:800;letter-spacing:-0.4px}
 }
 
 /* =========================================================
-   REVAMPED 3D ISOMETRIC DIORAMA ROOM STAGE MODAL
+   REBUILT 2.5D ISOMETRIC ARCHITECTURAL ROOM STUDIO
    ========================================================= */
 .room3d-modal-card{
-  background:linear-gradient(145deg,#0f172a,#1e1b4b);
-  color:white;
-  width:min(900px,96vw);
+  background:linear-gradient(160deg,#0f172a 0%,#172038 55%,#1e1b4b 100%);
+  color:#f8fafc;
+  width:min(980px,96vw);
   border-radius:28px;
-  padding:clamp(18px,3vw,26px);
-  border:2.5px solid #818cf8;
-  box-shadow:0 28px 70px #020617e6;
+  padding:clamp(16px,2.4vw,24px);
+  border:2px solid rgba(129,140,248,0.45);
+  box-shadow:0 32px 80px rgba(2,6,23,0.88);
   text-align:center;
-  max-height:94vh;
+  max-height:95vh;
   overflow-y:auto;
+}
+.room3d-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.room3d-title-group{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.room3d-title-group h2{
+  margin:0;
+  font-size:clamp(18px,2.3vw,23px);
+  letter-spacing:-0.01em;
+}
+.room3d-toast-bar{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:rgba(30,41,59,0.85);
+  border:1px solid rgba(148,163,184,0.28);
+  color:#e2e8f0;
+  border-radius:999px;
+  padding:6px 16px;
+  font-size:13px;
+  font-weight:700;
+  margin:0 auto 10px;
+  max-width:100%;
+  box-shadow:0 4px 14px rgba(2,6,23,0.35);
 }
 .room3d-viewport{
   width:100%;
-  height:420px;
-  margin:12px 0;
-  border-radius:24px;
+  height:460px;
+  margin:0 auto 12px;
+  border-radius:22px;
   overflow:hidden;
   position:relative;
-  background:radial-gradient(circle at 50% 15%,#38bdf833 0%,#1e1b4b 58%,#090d16 100%);
-  border:2.5px solid #6366f1;
-  perspective:1050px;
+  background:radial-gradient(circle at 50% 18%,#38bdf826 0%,#0f172a 72%,#060a14 100%);
+  border:2px solid rgba(99,102,241,0.5);
   user-select:none;
   cursor:grab;
-  box-shadow:inset 0 0 50px rgba(2,6,23,0.75);
-}
-.room3d-viewport.night-mode{
-  background:radial-gradient(circle at 50% 15%,#312e81 0%,#0f172a 60%,#020617 100%);
+  box-shadow:inset 0 0 40px rgba(2,6,23,0.65);
 }
 .room3d-viewport:active{cursor:grabbing}
 .room3d-scene{
   width:100%;
   height:100%;
   position:relative;
-  transform-style:preserve-3d;
-  transition:transform .24s cubic-bezier(.22,1,.36,1);
+  transform-origin:50% 54%;
+  transition:transform .32s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
 }
-/* Back Wall with Wainscoting & Crown Molding */
-.room3d-backwall{
-  position:absolute;
-  left:13%;
-  top:5%;
-  width:74%;
-  height:62%;
-  background:
-    linear-gradient(180deg,
-      #78350f 0%, #78350f 3.5%,
-      #fef3c7 3.5%, #fde68a 68%,
-      #92400e 68%, #92400e 71%,
-      #d97706 71%, #b45309 94%,
-      #451a03 94%, #451a03 100%);
-  border:4px solid #451a03;
-  border-radius:14px 14px 0 0;
-  transform:translateZ(-105px);
-  box-shadow:inset 0 0 42px rgba(120,53,15,0.28);
-}
-.room3d-viewport.night-mode .room3d-backwall{
-  background:
-    linear-gradient(180deg,
-      #312e81 0%, #312e81 3.5%,
-      #3730a3 3.5%, #1e1b4b 68%,
-      #4338ca 68%, #4338ca 71%,
-      #312e81 71%, #1e1b4b 94%,
-      #0f172a 94%, #0f172a 100%);
-  border-color:#312e81;
-}
-/* Wainscoting decorative panels on back wall */
-.room3d-wainscot{
-  position:absolute;
-  left:6%;
-  right:6%;
-  bottom:7%;
-  height:21%;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  pointer-events:none;
-  opacity:0.45;
-}
-.room3d-wainscot div{
-  border:2px solid #78350f;
-  border-radius:4px;
-  background:rgba(255,255,255,0.08);
-}
-/* Angled Left & Right Side Walls */
-.room3d-leftwall{
-  position:absolute;
-  left:-4%;
-  top:5%;
-  width:18%;
-  height:62%;
-  background:
-    linear-gradient(180deg,
-      #78350f 0%, #78350f 3.5%,
-      #fde68a 3.5%, #fcd34d 68%,
-      #92400e 68%, #92400e 71%,
-      #b45309 71%, #92400e 94%,
-      #451a03 94%, #451a03 100%);
-  border:3px solid #451a03;
-  transform-origin:right center;
-  transform:translateZ(-105px) rotateY(60deg);
-}
-.room3d-rightwall{
-  position:absolute;
-  right:-4%;
-  top:5%;
-  width:18%;
-  height:62%;
-  background:
-    linear-gradient(180deg,
-      #78350f 0%, #78350f 3.5%,
-      #fde68a 3.5%, #fcd34d 68%,
-      #92400e 68%, #92400e 71%,
-      #b45309 71%, #92400e 94%,
-      #451a03 94%, #451a03 100%);
-  border:3px solid #451a03;
-  transform-origin:left center;
-  transform:translateZ(-105px) rotateY(-60deg);
-}
-.room3d-viewport.night-mode .room3d-leftwall,
-.room3d-viewport.night-mode .room3d-rightwall{
-  background:
-    linear-gradient(180deg,
-      #1e1b4b 0%, #1e1b4b 3.5%,
-      #312e81 3.5%, #1e1b4b 68%,
-      #3730a3 68%, #3730a3 71%,
-      #1e1b4b 71%, #0f172a 94%,
-      #020617 94%, #020617 100%);
-  border-color:#312e81;
-}
-/* Hardwood Floor with Warm Specular Lighting */
-.room3d-floor{
-  position:absolute;
-  left:2%;
-  top:67%;
-  width:96%;
-  height:255px;
-  background:
-    radial-gradient(ellipse at 50% 35%,rgba(254,243,199,0.34),transparent 62%),
-    repeating-linear-gradient(90deg,#c27828 0px,#c27828 36px,#92400e 36px,#92400e 39px,#b45309 39px,#b45309 74px,#78350f 74px,#78350f 77px);
-  border-top:6px solid #451a03;
-  transform-origin:top center;
-  transform:translateZ(-105px) rotateX(75deg);
-  box-shadow:inset 0 22px 44px rgba(15,23,42,0.45);
-  pointer-events:none;
-}
-.room3d-viewport.night-mode .room3d-floor{
-  background:
-    radial-gradient(ellipse at 50% 35%,rgba(129,140,248,0.22),transparent 62%),
-    repeating-linear-gradient(90deg,#334155 0px,#334155 36px,#1e293b 36px,#1e293b 39px,#293548 39px,#293548 74px,#0f172a 74px,#0f172a 77px);
-  border-top-color:#1e1b4b;
-}
-
-/* Arched Scenic Window & Sunbeam Shafts */
-.room3d-window{
-  position:absolute;
-  top:11%;
-  left:50%;
-  transform:translateX(-50%);
-  width:154px;
-  height:106px;
-  background:linear-gradient(180deg,#0284c7 0%,#38bdf8 55%,#bae6fd 100%);
-  border:6px solid #78350f;
-  border-bottom-width:10px;
-  border-radius:78px 78px 12px 12px;
-  overflow:hidden;
-  box-shadow:0 0 32px #38bdf877, inset 0 0 16px #ffffff88;
-}
-.room3d-window.night{
-  background:linear-gradient(180deg,#020617 0%,#1e1b4b 65%,#312e81 100%);
-  border-color:#4338ca;
-  box-shadow:0 0 32px #818cf888, inset 0 0 16px #6366f155;
-}
-.room3d-window::after{
-  content:'';
+.room3d-arch-svg{
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(90deg,transparent 48%,#78350f 48%,#78350f 52%,transparent 52%),
-    linear-gradient(0deg,transparent 54%,#78350f 54%,#78350f 58%,transparent 58%);
+  width:100%;
+  height:100%;
   pointer-events:none;
+  display:block;
 }
-.room3d-window.night::after{
-  background:
-    linear-gradient(90deg,transparent 48%,#4338ca 48%,#4338ca 52%,transparent 52%),
-    linear-gradient(0deg,transparent 54%,#4338ca 54%,#4338ca 58%,transparent 58%);
-}
-.room3d-sunbeam{
+.room3d-ambient-glow{
   position:absolute;
-  top:22%;
-  left:34%;
-  width:32%;
-  height:72%;
-  background:linear-gradient(180deg,rgba(254,249,195,0.24),rgba(254,249,195,0.02));
-  clip-path:polygon(22% 0%, 78% 0%, 100% 100%, 0% 100%);
+  inset:0;
   pointer-events:none;
-  z-index:2;
+  z-index:5;
+  transition:opacity .35s ease, background .35s ease;
+  background:radial-gradient(circle at 50% 24%,rgba(254,249,195,0.16),transparent 62%);
 }
-.room3d-viewport.night-mode .room3d-sunbeam{
-  background:linear-gradient(180deg,rgba(165,180,252,0.18),rgba(99,102,241,0.01));
+.room3d-viewport.sunset-mode .room3d-ambient-glow{
+  background:radial-gradient(circle at 50% 26%,rgba(251,146,60,0.24),rgba(190,24,93,0.08) 58%,transparent 78%);
 }
-
+.room3d-viewport.night-mode .room3d-ambient-glow{
+  background:radial-gradient(circle at 50% 24%,rgba(129,140,248,0.18),rgba(2,6,23,0.38) 72%);
+}
 .room3d-item{
   position:absolute;
   cursor:pointer;
-  transition:transform .2s, filter .2s;
+  transition:transform .22s cubic-bezier(.22,1,.36,1), filter .22s ease;
   display:flex;
   flex-direction:column;
   align-items:center;
   z-index:4;
 }
-.room3d-item:hover{
-  transform:translateY(-4px) scale(1.04);
-  filter:drop-shadow(0 8px 16px #facc15aa);
+.room3d-item::before{
+  content:'';
+  position:absolute;
+  bottom:2px;
+  left:50%;
+  width:76%;
+  height:14px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(15,23,42,0.42),transparent 72%);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-1;
+}
+.room3d-item.wall-mounted::before,
+.room3d-item.flat-rug::before{
+  display:none;
+}
+.room3d-item:hover,
+.room3d-item:focus-visible{
+  transform:translateY(-5px) scale(1.05);
+  filter:drop-shadow(0 10px 18px rgba(250,204,21,0.55));
+  z-index:9;
+  outline:none;
 }
 .room3d-item-tag{
-  background:#0f172ae6;
+  position:absolute;
+  bottom:calc(100% + 6px);
+  left:50%;
+  transform:translateX(-50%) translateY(4px);
+  background:rgba(15,23,42,0.94);
   color:#fef08a;
-  font-size:10.5px;
+  font-size:11px;
   font-weight:800;
-  padding:2px 9px;
+  padding:4px 11px;
   border-radius:999px;
-  margin-top:2px;
   white-space:nowrap;
-  border:1px solid #facc1566;
-  box-shadow:0 3px 8px rgba(0,0,0,0.4);
+  border:1px solid rgba(250,204,21,0.55);
+  box-shadow:0 6px 16px rgba(2,6,23,0.55);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .16s ease, transform .16s ease;
+}
+.room3d-item:hover .room3d-item-tag,
+.room3d-item:focus-visible .room3d-item-tag{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 .room3d-buddy{
   position:absolute;
   left:50%;
-  bottom:44px;
-  width:142px;
-  height:142px;
-  transform:translateX(-50%) translateZ(28px);
+  bottom:52px;
+  width:136px;
+  height:136px;
+  transform:translateX(-50%);
   cursor:pointer;
-  z-index:7;
-  filter:drop-shadow(0 12px 14px rgba(15,23,42,0.5));
-  transition:left .48s cubic-bezier(.22,1,.36,1), bottom .48s cubic-bezier(.22,1,.36,1), transform .25s ease;
+  z-index:8;
+  filter:drop-shadow(0 12px 14px rgba(15,23,42,0.45));
+  transition:left .48s cubic-bezier(.22,1,.36,1), bottom .48s cubic-bezier(.22,1,.36,1), transform .24s ease;
 }
 .room3d-buddy::after{
   content:'';
   position:absolute;
   left:50%;
-  bottom:3px;
-  width:88px;
+  bottom:4px;
+  width:86px;
   height:18px;
   transform:translateX(-50%);
-  background:radial-gradient(ellipse at center,rgba(15,23,42,0.52),transparent 72%);
+  background:radial-gradient(ellipse at center,rgba(15,23,42,0.48),transparent 72%);
   border-radius:50%;
   pointer-events:none;
   z-index:-1;
@@ -1165,61 +1085,75 @@ h2{margin:0 0 5px;font-size:24px;font-weight:800;letter-spacing:-0.4px}
   font-weight:900;
   font-size:15px;
   color:#fde047;
-  text-shadow:0 2px 8px #0f172a;
+  text-shadow:0 2px 10px rgba(2,6,23,0.9);
   pointer-events:none;
   z-index:20;
   animation:heartRise 1.05s ease-out forwards;
 }
-
+.room3d-footer-bar{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.room3d-controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  background:rgba(15,23,42,0.72);
+  border:1px solid rgba(99,102,241,0.32);
+  border-radius:16px;
+  padding:8px 12px;
+}
+.room3d-btn-group{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.room3d-cam-btn{
+  background:rgba(255,255,255,0.08);
+  color:#f1f5f9;
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:999px;
+  padding:6px 12px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+  transition:background .15s, border-color .15s, transform .12s;
+}
+.room3d-cam-btn:hover{background:#4f46e5;border-color:#a5b4fc}
+.room3d-cam-btn.active{background:#4f46e5;border-color:#fde047;color:#fef08a}
 .room3d-quick-tray{
   display:flex;
   align-items:center;
-  justify-content:center;
-  gap:6px;
-  flex-wrap:wrap;
-  background:#0f172a99;
-  border:1px solid #4f46e566;
+  gap:7px;
+  overflow-x:auto;
+  background:rgba(15,23,42,0.72);
+  border:1px solid rgba(99,102,241,0.32);
   border-radius:16px;
-  padding:8px 12px;
-  margin-top:8px;
+  padding:9px 12px;
+  scrollbar-width:thin;
 }
 .room3d-tray-chip{
+  flex:0 0 auto;
   background:#1e1b4b;
   color:#e2e8f0;
-  border:1.5px solid #4f46e588;
+  border:1.5px solid rgba(99,102,241,0.45);
   border-radius:999px;
-  padding:4px 10px;
-  font-size:11.5px;
+  padding:5px 12px;
+  font-size:12px;
   font-weight:800;
   cursor:pointer;
   transition:all .15s;
 }
-.room3d-tray-chip:hover{border-color:#fde047;color:white}
+.room3d-tray-chip:hover{border-color:#fde047;color:#ffffff}
 .room3d-tray-chip.placed{
-  background:#312e81;
+  background:linear-gradient(135deg,#312e81,#4338ca);
   border-color:#facc15;
   color:#fef08a;
 }
-
-.room3d-controls{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
-.room3d-cam-btn{
-  background:#ffffff1c;
-  color:white;
-  border:1.5px solid #ffffff38;
-  border-radius:999px;
-  padding:6px 13px;
-  font-size:12.5px;
-  font-weight:800;
-  cursor:pointer;
-  transition:background .15s, border-color .15s;
-}
-.room3d-cam-btn:hover{background:#4f46e5;border-color:#a5b4fc}
 
 /* Lightning Round High-Score Board & Multiplier Pill */
 .lr-highscore-card{
@@ -2702,55 +2636,63 @@ footer{text-align:center;color:var(--muted);padding:0 20px 30px;font-size:13px}
   </div>
 </div>
 
-<!-- Revamped Enterable 3D Diorama Room Modal -->
+<!-- Rebuilt 2.5D Isometric Room Studio Modal -->
 <div class="modal hidden" id="room-3d-modal" role="dialog" aria-modal="true" aria-labelledby="room3d-title">
   <div class="room3d-modal-card">
-    <div class="game-head">
-      <h2 id="room3d-title">🏠 Buddy's 3D Room</h2>
-      <div class="game-head-right">
-        <span class="badge-pill" id="room3d-count-pill">0 Items Placed</span>
+    <div class="room3d-topbar">
+      <div class="room3d-title-group">
+        <h2 id="room3d-title">🏠 Buddy's Room</h2>
+        <span class="badge-pill" id="room3d-count-pill">0 / 10 Placed</span>
+      </div>
+      <div class="room3d-btn-group">
+        <button type="button" class="primary" id="room3d-shop-shortcut-btn" style="padding:7px 14px;font-size:12.5px">🛍️ Room Shop</button>
         <button type="button" class="exit-game-btn" id="exit-3d-room-btn">✕ Leave Room</button>
       </div>
     </div>
-    <p style="margin:6px 0 0;color:#cbd5e1;font-size:13.5px" id="room3d-interaction-msg">Drag to rotate the 3D room, switch Day/Night lighting, or click furniture &amp; Buddy to interact!</p>
+
+    <div class="room3d-toast-bar" id="room3d-interaction-msg">✨ Click Buddy or any furniture piece to interact, or drag to pan around the room!</div>
 
     <div class="room3d-viewport" id="room3d-viewport">
-      <div class="room3d-sunbeam" id="room3d-sunbeam"></div>
       <div class="room3d-scene" id="room3d-scene">
-        <div class="room3d-backwall">
-          <div class="room3d-window" id="room3d-window"></div>
-          <div class="room3d-wainscot"><div></div><div></div><div></div><div></div></div>
-          <div id="room3d-walldecor-slot"></div>
-        </div>
-        <div class="room3d-leftwall">
-          <div id="room3d-shelf-slot"></div>
-        </div>
-        <div class="room3d-rightwall">
-          <div style="position:absolute;top:18%;left:16%;right:16%;background:linear-gradient(145deg,#fffbeb,#fef3c7);color:#78350f;border:3px solid #f59e0b;border-radius:10px;padding:6px 4px;font-size:10px;font-weight:900;text-align:center;box-shadow:0 6px 12px rgba(0,0,0,0.35)">🏅<br>HONOR<br>SCHOLAR</div>
-        </div>
-        <div class="room3d-floor">
-          <div id="room3d-rug-slot"></div>
-        </div>
+        <div id="room3d-arch-layer" class="room3d-arch-svg"></div>
+
+        <!-- Back Wall & Upper Slots -->
+        <div id="room3d-walldecor-slot"></div>
+        <div id="room3d-shelf-slot"></div>
+        <div id="room3d-orrery-slot"></div>
+
+        <!-- Back-Wall Piers -->
         <div id="room3d-hearth-slot"></div>
+        <div id="room3d-fountain-slot"></div>
+
+        <!-- Floor Rug & Midground Furniture -->
+        <div id="room3d-rug-slot"></div>
         <div id="room3d-scope-slot"></div>
         <div id="room3d-lamp-slot"></div>
-        <div id="room3d-plant-slot"></div>
-        <div id="room3d-fountain-slot"></div>
-        <div id="room3d-orrery-slot"></div>
+
+        <!-- Foreground Cozy Corners & Buddy -->
         <div id="room3d-bed-slot"></div>
+        <div id="room3d-plant-slot"></div>
         <div class="room3d-buddy" id="room3d-buddy-actor" title="Click Buddy to dance!"></div>
       </div>
+      <div class="room3d-ambient-glow" id="room3d-ambient-glow"></div>
     </div>
 
-    <div class="room3d-quick-tray" id="room3d-quick-tray"></div>
-
-    <div class="room3d-controls">
-      <button type="button" class="room3d-cam-btn" id="cam-left-btn">◀ Left Wall</button>
-      <button type="button" class="room3d-cam-btn" id="cam-center-btn">🎯 Center</button>
-      <button type="button" class="room3d-cam-btn" id="cam-right-btn">Right Wall ▶</button>
-      <button type="button" class="room3d-cam-btn" id="cam-tilt-btn">🔼 Top-Down Angle</button>
-      <button type="button" class="room3d-cam-btn" id="cam-lighting-btn">🌙 Night Mode</button>
-      <button type="button" class="primary" id="room3d-shop-shortcut-btn" style="padding:6px 14px;font-size:12.5px">🛍️ Room Shop</button>
+    <div class="room3d-footer-bar">
+      <div class="room3d-controls">
+        <div class="room3d-btn-group">
+          <button type="button" class="room3d-cam-btn" id="cam-left-btn">◀ Left Nook</button>
+          <button type="button" class="room3d-cam-btn active" id="cam-center-btn">🎯 Full Room</button>
+          <button type="button" class="room3d-cam-btn" id="cam-right-btn">Right Nook ▶</button>
+          <button type="button" class="room3d-cam-btn" id="cam-tilt-btn">🔍 Zoom</button>
+        </div>
+        <div class="room3d-btn-group">
+          <button type="button" class="room3d-cam-btn" id="cam-theme-day-btn">☀️ Day</button>
+          <button type="button" class="room3d-cam-btn" id="cam-theme-sunset-btn">🌅 Sunset</button>
+          <button type="button" class="room3d-cam-btn" id="cam-lighting-btn">🌙 Night</button>
+        </div>
+      </div>
+      <div class="room3d-quick-tray" id="room3d-quick-tray"></div>
     </div>
   </div>
 </div>
@@ -3060,7 +3002,7 @@ const state={
  ownedAnimals:['fox'],ownedCosmetics:['bg_meadow'],
  ownedRoomItems:[],
  roomEquipped:{},
- roomCam:{rx:5,ry:0},
+ roomCam:{panX:0,panY:0,zoom:1},roomTheme:'day',
  roomNightMode:false,
  roomNapDate:'',
  roomFountainDate:'',
@@ -3806,12 +3748,167 @@ document.querySelectorAll('.expr-btn').forEach(btn=>{
 });
 
 /* =========================================================
-   REVAMPED 3D DIORAMA ROOM MODAL & INTERACTIVE FURNITURE
+   REBUILT 2.5D ISOMETRIC ROOM STUDIO & INTERACTIVE FURNITURE
    ========================================================= */
+function getRoomLightingTheme(){
+ if(state.roomTheme)return state.roomTheme;
+ return state.roomNightMode?'night':'day';
+}
+
+function setRoomLightingTheme(theme){
+ state.roomTheme=theme;
+ state.roomNightMode=(theme==='night');
+ renderRoom3DScene();
+}
+
+function buildRoomArchitectureSVG(theme){
+ const themes={
+  day:{
+   wallTop:'#fef3c7',wallBot:'#fde68a',
+   sideTop:'#fde68a',sideBot:'#fcd34d',
+   wainscot:'#d97706',trim:'#78350f',
+   floorA:'#d98a3c',floorB:'#c47429',floorLine:'#854d0e',
+   skyTop:'#0284c7',skyMid:'#38bdf8',skyBot:'#bae6fd',
+   hillA:'#4ade80',hillB:'#16a34a',
+   beam:'rgba(254,249,195,0.26)',
+   plaqueBg:'#fffbeb',plaqueBorder:'#f59e0b',plaqueText:'#78350f'
+  },
+  sunset:{
+   wallTop:'#fed7aa',wallBot:'#fdba74',
+   sideTop:'#fdba74',sideBot:'#fb923c',
+   wainscot:'#c2410c',trim:'#7c2d12',
+   floorA:'#b45309',floorB:'#9a3412',floorLine:'#431407',
+   skyTop:'#7c2d12',skyMid:'#f97316',skyBot:'#fde047',
+   hillA:'#9a3412',hillB:'#431407',
+   beam:'rgba(253,186,116,0.24)',
+   plaqueBg:'#fff7ed',plaqueBorder:'#ea580c',plaqueText:'#7c2d12'
+  },
+  night:{
+   wallTop:'#312e81',wallBot:'#1e1b4b',
+   sideTop:'#27246b',sideBot:'#17153b',
+   wainscot:'#3730a3',trim:'#0f172a',
+   floorA:'#334155',floorB:'#1e293b',floorLine:'#0f172a',
+   skyTop:'#020617',skyMid:'#0f172a',skyBot:'#312e81',
+   hillA:'#1e1b4b',hillB:'#090d16',
+   beam:'rgba(165,180,252,0.14)',
+   plaqueBg:'#1e1b4b',plaqueBorder:'#818cf8',plaqueText:'#fef08a'
+  }
+ };
+ const pal=themes[theme]||themes.day;
+
+ const skyExtras=theme==='night'
+  ? `<circle cx="496" cy="74" r="14" fill="#fef08a"/>
+     <circle cx="502" cy="70" r="12" fill="${pal.skyTop}"/>
+     <circle cx="428" cy="64" r="2" fill="#ffffff"/>
+     <circle cx="454" cy="86" r="1.8" fill="#fde047"/>
+     <circle cx="472" cy="58" r="2.2" fill="#ffffff"/>
+     <circle cx="522" cy="92" r="1.8" fill="#ffffff"/>`
+  : theme==='sunset'
+  ? `<circle cx="470" cy="116" r="22" fill="#fef08a" opacity="0.9"/>
+     <ellipse cx="428" cy="74" rx="18" ry="6" fill="#fed7aa" opacity="0.65"/>
+     <ellipse cx="514" cy="84" rx="20" ry="6" fill="#fed7aa" opacity="0.55"/>`
+  : `<circle cx="508" cy="68" r="14" fill="#fef08a"/>
+     <g fill="#ffffff" opacity="0.88">
+       <circle cx="424" cy="74" r="10"/><circle cx="436" cy="71" r="12"/><circle cx="449" cy="75" r="9"/>
+     </g>`;
+
+ return `<svg viewBox="0 0 940 460" preserveAspectRatio="none" width="100%" height="100%">
+  <defs>
+   <linearGradient id="rmBackWall" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="${pal.wallTop}"/>
+    <stop offset="100%" stop-color="${pal.wallBot}"/>
+   </linearGradient>
+   <linearGradient id="rmSideWall" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="${pal.sideTop}"/>
+    <stop offset="100%" stop-color="${pal.sideBot}"/>
+   </linearGradient>
+   <linearGradient id="rmSky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="${pal.skyTop}"/>
+    <stop offset="58%" stop-color="${pal.skyMid}"/>
+    <stop offset="100%" stop-color="${pal.skyBot}"/>
+   </linearGradient>
+   <linearGradient id="rmFloor" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="${pal.floorB}"/>
+    <stop offset="40%" stop-color="${pal.floorA}"/>
+    <stop offset="100%" stop-color="${pal.floorB}"/>
+   </linearGradient>
+   <clipPath id="rmWinClip">
+    <path d="M402 146 V94 A68 56 0 0 1 538 94 V146 Z"/>
+   </clipPath>
+  </defs>
+
+  <!-- Ceiling & Outer Frame -->
+  <rect x="0" y="0" width="940" height="460" fill="${pal.trim}"/>
+
+  <!-- Left Angled Wall -->
+  <polygon points="18,14 166,46 166,288 18,392" fill="url(#rmSideWall)" stroke="${pal.trim}" stroke-width="4"/>
+  <polygon points="18,224 166,214 166,288 18,392" fill="${pal.wainscot}" opacity="0.72"/>
+  <line x1="18" y1="224" x2="166" y2="214" stroke="${pal.trim}" stroke-width="5"/>
+
+  <!-- Right Angled Wall -->
+  <polygon points="922,14 774,46 774,288 922,392" fill="url(#rmSideWall)" stroke="${pal.trim}" stroke-width="4"/>
+  <polygon points="922,224 774,214 774,288 922,392" fill="${pal.wainscot}" opacity="0.72"/>
+  <line x1="922" y1="224" x2="774" y2="214" stroke="${pal.trim}" stroke-width="5"/>
+
+  <!-- Center Back Wall -->
+  <rect x="166" y="46" width="608" height="242" fill="url(#rmBackWall)" stroke="${pal.trim}" stroke-width="4"/>
+  <!-- Wainscoting & Dado Rail -->
+  <rect x="166" y="214" width="608" height="74" fill="${pal.wainscot}" opacity="0.75"/>
+  <rect x="166" y="210" width="608" height="8" fill="${pal.trim}"/>
+  <g stroke="${pal.trim}" stroke-width="2" fill="rgba(255,255,255,0.08)" opacity="0.6">
+   <rect x="188" y="226" width="122" height="46" rx="5"/>
+   <rect x="334" y="226" width="122" height="46" rx="5"/>
+   <rect x="484" y="226" width="122" height="46" rx="5"/>
+   <rect x="630" y="226" width="122" height="46" rx="5"/>
+  </g>
+
+  <!-- Panoramic Arched Window -->
+  <g clip-path="url(#rmWinClip)">
+   <rect x="400" y="34" width="140" height="116" fill="url(#rmSky)"/>
+   ${skyExtras}
+   <path d="M400 132 Q442 110 482 128 Q514 114 542 130 V150 H400 Z" fill="${pal.hillA}"/>
+   <path d="M400 138 Q455 122 542 138 V150 H400 Z" fill="${pal.hillB}"/>
+  </g>
+  <path d="M402 146 V94 A68 56 0 0 1 538 94 V146 Z" fill="none" stroke="${pal.trim}" stroke-width="7"/>
+  <line x1="470" y1="38" x2="470" y2="146" stroke="${pal.trim}" stroke-width="4"/>
+  <line x1="402" y1="100" x2="538" y2="100" stroke="${pal.trim}" stroke-width="4"/>
+  <rect x="394" y="144" width="152" height="9" rx="4" fill="${pal.trim}"/>
+
+  <!-- Honor Scholar Framed Plaque on Right Wing Wall -->
+  <g transform="translate(812,86) skewY(12)">
+   <rect x="0" y="0" width="66" height="76" rx="8" fill="${pal.plaqueBg}" stroke="${pal.plaqueBorder}" stroke-width="3.5"/>
+   <text x="33" y="25" text-anchor="middle" font-size="16">🏅</text>
+   <text x="33" y="44" text-anchor="middle" font-size="9.5" font-weight="900" fill="${pal.plaqueText}">HONOR</text>
+   <text x="33" y="58" text-anchor="middle" font-size="9.5" font-weight="900" fill="${pal.plaqueText}">SCHOLAR</text>
+  </g>
+
+  <!-- Perspective Hardwood Floor -->
+  <polygon points="166,288 774,288 922,392 922,446 18,446 18,392" fill="url(#rmFloor)" stroke="${pal.trim}" stroke-width="4"/>
+  <!-- Perspective Floorboard Lines -->
+  <g stroke="${pal.floorLine}" stroke-width="2" opacity="0.45">
+   <line x1="252" y1="288" x2="140" y2="446"/>
+   <line x1="340" y1="288" x2="285" y2="446"/>
+   <line x1="428" y1="288" x2="412" y2="446"/>
+   <line x1="512" y1="288" x2="528" y2="446"/>
+   <line x1="600" y1="288" x2="655" y2="446"/>
+   <line x1="688" y1="288" x2="800" y2="446"/>
+   <line x1="114" y1="324" x2="826" y2="324"/>
+   <line x1="56" y1="366" x2="884" y2="366"/>
+   <line x1="18" y1="412" x2="922" y2="412"/>
+  </g>
+
+  <!-- Soft Window Sunbeam -->
+  <polygon points="404,152 536,152 650,432 290,432" fill="${pal.beam}"/>
+ </svg>`;
+}
+
 function updateRoom3DCamera(){
  const scene=$('room3d-scene');
  if(!scene)return;
- scene.style.transform=`rotateX(${state.roomCam.rx}deg) rotateY(${state.roomCam.ry}deg)`;
+ const panX=state.roomCam.panX||0;
+ const panY=state.roomCam.panY||0;
+ const zoom=state.roomCam.zoom||1;
+ scene.style.transform=`translate(${panX}px, ${panY}px) scale(${zoom})`;
 }
 
 function spawnRoomPop(text, xPct=50, yPct=55){
@@ -3831,7 +3928,7 @@ function moveBuddyIn3DRoom(leftPct, bottomPx, msg){
  if(actor){
   actor.style.left=leftPct+'%';
   actor.style.bottom=bottomPx+'px';
-  actor.innerHTML=buildBuddyOverlaySVG(142);
+  actor.innerHTML=buildBuddyOverlaySVG(136);
  }
  if(msg)$('room3d-interaction-msg').textContent=msg;
 }
@@ -3841,10 +3938,10 @@ function renderRoom3DQuickTray(){
  if(!tray)return;
  const owned=roomItems.filter(r=>state.ownedRoomItems.includes(r.id));
  if(owned.length===0){
-  tray.innerHTML=`<span style="font-size:12px;color:#cbd5e1;font-weight:700">No room furniture unlocked yet — visit <strong>Room Shop</strong> to decorate!</span>`;
+  tray.innerHTML=`<span style="font-size:12.5px;color:#cbd5e1;font-weight:700">No furniture unlocked yet — click <strong>🛍️ Room Shop</strong> above to decorate Buddy's space!</span>`;
   return;
  }
- tray.innerHTML=`<span style="font-size:11.5px;color:#fde047;font-weight:800;margin-right:4px">Quick Place:</span>`+owned.map(item=>{
+ tray.innerHTML=`<span style="font-size:11.5px;color:#fde047;font-weight:800;flex:0 0 auto">Furniture Dock:</span>`+owned.map(item=>{
   const isPlaced=state.roomEquipped[item.slot]===item.id;
   return `<button type="button" class="room3d-tray-chip ${isPlaced?'placed':''}" data-tray-room="${item.id}">${item.icon} ${escapeHTML(item.name)}${isPlaced?' ✓':''}</button>`;
  }).join('');
@@ -3865,21 +3962,33 @@ function renderRoom3DQuickTray(){
 
 function renderRoom3DScene(){
  const bName=getBuddyName();
- $('room3d-title').textContent=`🏠 ${bName}'s 3D Room`;
- $('room3d-buddy-actor').innerHTML=buildBuddyOverlaySVG(142);
- $('room3d-buddy-actor').style.left='50%';
- $('room3d-buddy-actor').style.bottom='44px';
+ $('room3d-title').textContent=`🏠 ${bName}'s Room`;
+ const actor=$('room3d-buddy-actor');
+ if(actor){
+  actor.innerHTML=buildBuddyOverlaySVG(136);
+  actor.style.left='50%';
+  actor.style.bottom='52px';
+ }
 
+ const theme=getRoomLightingTheme();
  const vp=$('room3d-viewport');
- const win=$('room3d-window');
- const lightBtn=$('cam-lighting-btn');
- if(vp)vp.classList.toggle('night-mode',!!state.roomNightMode);
- if(win)win.classList.toggle('night',!!state.roomNightMode);
- if(lightBtn)lightBtn.textContent=state.roomNightMode?'☀️ Day Mode':'🌙 Night Mode';
+ if(vp){
+  vp.classList.toggle('night-mode',theme==='night');
+  vp.classList.toggle('sunset-mode',theme==='sunset');
+ }
+ const arch=$('room3d-arch-layer');
+ if(arch)arch.innerHTML=buildRoomArchitectureSVG(theme);
+
+ const dayBtn=$('cam-theme-day-btn');
+ const sunBtn=$('cam-theme-sunset-btn');
+ const nightBtn=$('cam-lighting-btn');
+ if(dayBtn)dayBtn.classList.toggle('active',theme==='day');
+ if(sunBtn)sunBtn.classList.toggle('active',theme==='sunset');
+ if(nightBtn)nightBtn.classList.toggle('active',theme==='night');
 
  const eq=state.roomEquipped||{};
  const count=Object.values(eq).filter(Boolean).length;
- $('room3d-count-pill').textContent=`${count} Item${count===1?'':'s'} Placed`;
+ $('room3d-count-pill').textContent=`${count} / 10 Placed`;
 
  const slots={
   rug:$('room3d-rug-slot'),
@@ -3895,37 +4004,74 @@ function renderRoom3DScene(){
  };
  Object.values(slots).forEach(el=>{if(el)el.innerHTML='';});
 
+ /* 1. Center Floor Rug */
  if(eq.rug){
   const item=roomItems.find(x=>x.id===eq.rug);
   if(item){
-   slots.rug.innerHTML=`<div class="room3d-item" style="left:50%;top:18%;transform:translateX(-50%)" id="r3d-rug">${buildRoomItemSVG(item.id,240)}</div>`;
+   slots.rug.innerHTML=`<div class="room3d-item flat-rug" tabindex="0" style="left:50%;bottom:30px;transform:translateX(-50%);z-index:2" id="r3d-rug">${buildRoomItemSVG(item.id,270)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
    $('r3d-rug').onclick=()=>{
     sfx.pop();
-    moveBuddyIn3DRoom(50,48,`✨ ${bName} spun around happily on the ${item.name}!`);
-    spawnRoomPop('✨ Cozy!',50,55);
+    moveBuddyIn3DRoom(50,56,`✨ ${bName} spun happily on the ${item.name}!`);
+    spawnRoomPop('✨ Cozy!',50,58);
    };
   }
  }
+
+ /* 2. Left-Center Back Wall Decor (or Standing Mini Arcade) */
  if(eq.walldecor){
   const item=roomItems.find(x=>x.id===eq.walldecor);
   if(item){
-   slots.walldecor.innerHTML=`<div class="room3d-item" style="left:10%;top:10%" id="r3d-walldecor">${buildRoomItemSVG(item.id,96)}<span class="room3d-item-tag">${item.name}</span></div>`;
+   const isArcade=(item.id==='decor_arcade');
+   const posStyle=isArcade
+    ? 'left:21%;bottom:158px;z-index:4'
+    : 'left:22%;top:56px;z-index:3';
+   const cls=isArcade?'room3d-item':'room3d-item wall-mounted';
+   const sz=isArcade?94:108;
+   slots.walldecor.innerHTML=`<div class="${cls}" tabindex="0" style="${posStyle}" id="r3d-walldecor">${buildRoomItemSVG(item.id,sz)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
    $('r3d-walldecor').onclick=()=>{
     sfx.star();
-    if(item.id==='decor_arcade'){
+    if(isArcade){
      closeRoom3DModal();
      openMiniGameModal();
     }else{
-     moveBuddyIn3DRoom(34,62,`💡 ${bName} admired the ${item.name}!`);
-     spawnRoomPop('💡 Twinkle!',28,32);
+     moveBuddyIn3DRoom(31,96,`💡 ${bName} admired the ${item.name}!`);
+     spawnRoomPop('💡 Twinkle!',26,34);
     }
    };
   }
  }
+
+ /* 3. Left Wing Wall Shelf */
+ if(eq.shelf){
+  const item=roomItems.find(x=>x.id===eq.shelf);
+  if(item){
+   slots.shelf.innerHTML=`<div class="room3d-item wall-mounted" tabindex="0" style="left:5.5%;top:88px;z-index:4" id="r3d-shelf">${buildRoomItemSVG(item.id,94)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
+   $('r3d-shelf').onclick=()=>{
+    sfx.pop();
+    moveBuddyIn3DRoom(24,78,`📚 ${bName} picked a favorite story from the ${item.name}!`);
+    spawnRoomPop('📖 Read!',16,42);
+   };
+  }
+ }
+
+ /* 4. Right-Center Back Wall Celestial Orrery */
+ if(eq.orrery){
+  const item=roomItems.find(x=>x.id===eq.orrery);
+  if(item){
+   slots.orrery.innerHTML=`<div class="room3d-item" tabindex="0" style="left:65%;top:62px;z-index:3" id="r3d-orrery">${buildRoomItemSVG(item.id,92)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
+   $('r3d-orrery').onclick=()=>{
+    sfx.star();
+    moveBuddyIn3DRoom(63,104,`⚡ ${bName} watched the Celestial Storm Orrery orbit!`);
+    spawnRoomPop('⚡ Cosmic!',66,30);
+   };
+  }
+ }
+
+ /* 5. Back-Left Hearth */
  if(eq.hearth){
   const item=roomItems.find(x=>x.id===eq.hearth);
   if(item){
-   slots.hearth.innerHTML=`<div class="room3d-item" style="left:21%;bottom:96px;transform:translateZ(-42px)" id="r3d-hearth">${buildRoomItemSVG(item.id,96)}<span class="room3d-item-tag">${item.name}</span></div>`;
+   slots.hearth.innerHTML=`<div class="room3d-item" tabindex="0" style="left:32%;bottom:156px;z-index:4" id="r3d-hearth">${buildRoomItemSVG(item.id,98)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
    $('r3d-hearth').onclick=()=>{
     const today=new Date().toISOString().slice(0,10);
     if(state.roomNapDate!==today){
@@ -3934,20 +4080,22 @@ function renderRoom3DScene(){
      sfx.fanfare();
      saveShop();
      renderAvatar();
-     moveBuddyIn3DRoom(32,68,`🔥 ${bName} warmed up by the Phoenix Ember Hearth (+12 XP)!`);
-     spawnRoomPop('+12 XP 🔥',30,45);
+     moveBuddyIn3DRoom(37,112,`🔥 ${bName} warmed up by the Phoenix Ember Hearth (+12 XP)!`);
+     spawnRoomPop('+12 XP 🔥',35,48);
     }else{
      sfx.pop();
-     moveBuddyIn3DRoom(32,68,`🔥 The Phoenix Ember Hearth crackles with warm elemental fire!`);
-     spawnRoomPop('🔥 Warm!',30,45);
+     moveBuddyIn3DRoom(37,112,`🔥 The Phoenix Ember Hearth crackles warmly!`);
+     spawnRoomPop('🔥 Warm!',35,48);
     }
    };
   }
  }
+
+ /* 6. Back-Right Fountain */
  if(eq.fountain){
   const item=roomItems.find(x=>x.id===eq.fountain);
   if(item){
-   slots.fountain.innerHTML=`<div class="room3d-item" style="right:21%;bottom:96px;transform:translateZ(-42px)" id="r3d-fountain">${buildRoomItemSVG(item.id,96)}<span class="room3d-item-tag">${item.name}</span></div>`;
+   slots.fountain.innerHTML=`<div class="room3d-item" tabindex="0" style="left:58%;bottom:156px;z-index:4" id="r3d-fountain">${buildRoomItemSVG(item.id,98)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
    $('r3d-fountain').onclick=()=>{
     const today=new Date().toISOString().slice(0,10);
     if(state.roomFountainDate!==today){
@@ -3957,77 +4105,50 @@ function renderRoom3DScene(){
      sfx.fanfare();
      saveShop();
      updateHUD();
-     moveBuddyIn3DRoom(68,68,`💧 ${bName} made a wish at the Starlight Fountain (+3 ⭐)!`);
-     spawnRoomPop('+3 ⭐ 💧',68,45);
+     moveBuddyIn3DRoom(56,112,`💧 ${bName} made a wish at the Starlight Fountain (+3 ⭐)!`);
+     spawnRoomPop('+3 ⭐ 💧',60,48);
     }else{
      sfx.pop();
-     moveBuddyIn3DRoom(68,68,`💧 Sparkling starlight water cascades peacefully in the fountain.`);
-     spawnRoomPop('💧 Splash!',68,45);
+     moveBuddyIn3DRoom(56,112,`💧 Sparkling starlight water ripples gently in the fountain.`);
+     spawnRoomPop('💧 Splash!',60,48);
     }
    };
   }
  }
- if(eq.orrery){
-  const item=roomItems.find(x=>x.id===eq.orrery);
-  if(item){
-   slots.orrery.innerHTML=`<div class="room3d-item" style="left:50%;top:12%;transform:translateX(-50%) translateZ(-12px)" id="r3d-orrery">${buildRoomItemSVG(item.id,86)}<span class="room3d-item-tag">${item.name}</span></div>`;
-   $('r3d-orrery').onclick=()=>{
-    sfx.star();
-    moveBuddyIn3DRoom(50,60,`⚡ ${bName} watched the Celestial Storm Orrery orbit with lightning!`);
-    spawnRoomPop('⚡ Cosmic!',50,26);
-   };
-  }
- }
- if(eq.shelf){
-  const item=roomItems.find(x=>x.id===eq.shelf);
-  if(item){
-   slots.shelf.innerHTML=`<div class="room3d-item" style="left:16%;top:26%" id="r3d-shelf">${buildRoomItemSVG(item.id,96)}<span class="room3d-item-tag">${item.name}</span></div>`;
-   $('r3d-shelf').onclick=()=>{
-    sfx.pop();
-    moveBuddyIn3DRoom(26,56,`📚 ${bName} pulled a favorite adventure book from ${item.name}!`);
-    spawnRoomPop('📖 Read!',20,44);
-   };
-  }
- }
+
+ /* 7. Mid-Right Stargazer Telescope */
  if(eq.scope){
   const item=roomItems.find(x=>x.id===eq.scope);
   if(item){
-   slots.scope.innerHTML=`<div class="room3d-item" style="left:36%;bottom:102px;transform:translateZ(-30px)" id="r3d-scope">${buildRoomItemSVG(item.id,86)}<span class="room3d-item-tag">${item.name}</span></div>`;
+   slots.scope.innerHTML=`<div class="room3d-item" tabindex="0" style="left:70%;bottom:136px;z-index:5" id="r3d-scope">${buildRoomItemSVG(item.id,92)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
    $('r3d-scope').onclick=()=>{
     sfx.star();
-    moveBuddyIn3DRoom(40,66,`🔭 ${bName} peered through the ${item.name} and spotted Saturn's rings!`);
-    spawnRoomPop('🪐 Wow!',38,44);
+    moveBuddyIn3DRoom(65,102,`🔭 ${bName} looked through the ${item.name} and spotted Saturn's rings!`);
+    spawnRoomPop('🪐 Wow!',71,48);
    };
   }
  }
+
+ /* 8. Right-Back Corner Ambient Lamp */
  if(eq.lamp){
   const item=roomItems.find(x=>x.id===eq.lamp);
   if(item){
-   slots.lamp.innerHTML=`<div class="room3d-item" style="right:26%;bottom:102px;transform:translateZ(-24px)" id="r3d-lamp">${buildRoomItemSVG(item.id,78)}<span class="room3d-item-tag">${item.name}</span></div>`;
+   slots.lamp.innerHTML=`<div class="room3d-item" tabindex="0" style="left:80%;bottom:164px;z-index:4" id="r3d-lamp">${buildRoomItemSVG(item.id,84)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
    $('r3d-lamp').onclick=()=>{
     sfx.pop();
-    state.roomNightMode=!state.roomNightMode;
-    renderRoom3DScene();
-    moveBuddyIn3DRoom(64,62,`💡 ${bName} toggled the ${item.name} (${state.roomNightMode?'Night':'Day'} Glow)!`);
-    spawnRoomPop('✨ Glow!',66,46);
+    const nextTheme=(theme==='day')?'sunset':(theme==='sunset'?'night':'day');
+    setRoomLightingTheme(nextTheme);
+    moveBuddyIn3DRoom(73,110,`💡 ${bName} switched the ${item.name} to ${nextTheme.toUpperCase()} ambiance!`);
+    spawnRoomPop('✨ Glow!',81,46);
    };
   }
  }
- if(eq.plant){
-  const item=roomItems.find(x=>x.id===eq.plant);
-  if(item){
-   slots.plant.innerHTML=`<div class="room3d-item" style="right:11%;bottom:54px;transform:translateZ(12px)" id="r3d-plant">${buildRoomItemSVG(item.id,94)}<span class="room3d-item-tag">${item.name}</span></div>`;
-   $('r3d-plant').onclick=()=>{
-    sfx.pop();
-    moveBuddyIn3DRoom(74,48,`🌿 ${bName} watered the ${item.name}!`);
-    spawnRoomPop('💧 Fresh!',78,54);
-   };
-  }
- }
+
+ /* 9. Front-Left Cozy Pet Bed */
  if(eq.bed){
   const item=roomItems.find(x=>x.id===eq.bed);
   if(item){
-   slots.bed.innerHTML=`<div class="room3d-item" style="left:11%;bottom:44px;transform:translateZ(18px)" id="r3d-bed">${buildRoomItemSVG(item.id,106)}<span class="room3d-item-tag">${item.name}</span></div>`;
+   slots.bed.innerHTML=`<div class="room3d-item" tabindex="0" style="left:11%;bottom:44px;z-index:6" id="r3d-bed">${buildRoomItemSVG(item.id,118)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
    $('r3d-bed').onclick=()=>{
     const today=new Date().toISOString().slice(0,10);
     const napXP=(item.id==='bed_royal')?4:3;
@@ -4037,43 +4158,57 @@ function renderRoom3DScene(){
      sfx.fanfare();
      saveShop();
      renderAvatar();
-     moveBuddyIn3DRoom(24,42,`😴 ${bName} took a cozy power nap on ${item.name} (+${napXP} XP)!`);
-     spawnRoomPop(`+${napXP} XP 💤`,24,52);
+     moveBuddyIn3DRoom(23,46,`😴 ${bName} took a cozy power nap on ${item.name} (+${napXP} XP)!`);
+     spawnRoomPop(`+${napXP} XP 💤`,18,62);
     }else{
      sfx.pop();
-     moveBuddyIn3DRoom(24,42,`💤 ${bName} curled up happily on the ${item.name}!`);
-     spawnRoomPop('💖 Cozy!',24,52);
+     moveBuddyIn3DRoom(23,46,`💤 ${bName} curled up happily on the ${item.name}!`);
+     spawnRoomPop('💖 Cozy!',18,62);
     }
    };
   }
  }
 
- $('room3d-buddy-actor').onclick=()=>{
-  sfx.pop();
-  const today=new Date().toISOString().slice(0,10);
-  if(state.roomBonusDate!==today){state.roomBonusDate=today;state.roomBonusCount=0;}
-  const actor=$('room3d-buddy-actor');
-  actor.style.transform='translateX(-50%) translateZ(28px) scale(1.14) rotate(-6deg)';
-  setTimeout(()=>{if(actor)actor.style.transform='translateX(-50%) translateZ(28px)';},280);
-  if(state.roomBonusCount<3){
-   state.roomBonusCount++;
-   addBuddyXP(1);
-   saveShop();
-   renderAvatar();
-   $('room3d-interaction-msg').textContent=`🎉 ${bName} danced with joy! (+1 XP · ${state.roomBonusCount}/3 daily room hugs)`;
-   spawnRoomPop('+1 XP 💖',50,48);
-  }else{
-   $('room3d-interaction-msg').textContent=`🐾 ${bName} loves hanging out with you in this awesome room!`;
-   spawnRoomPop('💖 Yay!',50,48);
+ /* 10. Front-Right Window Plant / Aquarium */
+ if(eq.plant){
+  const item=roomItems.find(x=>x.id===eq.plant);
+  if(item){
+   slots.plant.innerHTML=`<div class="room3d-item" tabindex="0" style="left:82%;bottom:46px;z-index:6" id="r3d-plant">${buildRoomItemSVG(item.id,104)}<span class="room3d-item-tag">${escapeHTML(item.name)}</span></div>`;
+   $('r3d-plant').onclick=()=>{
+    sfx.pop();
+    moveBuddyIn3DRoom(74,48,`🌿 ${bName} tended to the ${item.name}!`);
+    spawnRoomPop('💧 Fresh!',84,60);
+   };
   }
- };
+ }
+
+ if(actor){
+  actor.onclick=()=>{
+   sfx.pop();
+   const today=new Date().toISOString().slice(0,10);
+   if(state.roomBonusDate!==today){state.roomBonusDate=today;state.roomBonusCount=0;}
+   actor.style.transform='translateX(-50%) scale(1.13) rotate(-5deg)';
+   setTimeout(()=>{if(actor)actor.style.transform='translateX(-50%)';},260);
+   if(state.roomBonusCount<3){
+    state.roomBonusCount++;
+    addBuddyXP(1);
+    saveShop();
+    renderAvatar();
+    $('room3d-interaction-msg').textContent=`🎉 ${bName} danced with joy! (+1 XP · ${state.roomBonusCount}/3 daily room hugs)`;
+    spawnRoomPop('+1 XP 💖',50,48);
+   }else{
+    $('room3d-interaction-msg').textContent=`🐾 ${bName} loves hanging out in this awesome room!`;
+    spawnRoomPop('💖 Yay!',50,48);
+   }
+  };
+ }
 
  renderRoom3DQuickTray();
  updateRoom3DCamera();
 }
 
 function openRoom3DModal(){
- state.roomCam={rx:5,ry:0};
+ state.roomCam={panX:0,panY:0,zoom:1};
  $('room-3d-modal').classList.remove('hidden');
  renderRoom3DScene();
 }
@@ -4088,25 +4223,61 @@ $('room3d-shop-shortcut-btn').onclick=()=>{
  state.shopCat='room';
  showTab('market');
 };
-$('cam-left-btn').onclick=()=>{state.roomCam={rx:4,ry:24};updateRoom3DCamera();sfx.pop();};
-$('cam-center-btn').onclick=()=>{state.roomCam={rx:5,ry:0};updateRoom3DCamera();sfx.pop();};
-$('cam-right-btn').onclick=()=>{state.roomCam={rx:4,ry:-24};updateRoom3DCamera();sfx.pop();};
-$('cam-tilt-btn').onclick=()=>{state.roomCam.rx=state.roomCam.rx>10?5:18;updateRoom3DCamera();sfx.pop();};
-$('cam-lighting-btn').onclick=()=>{state.roomNightMode=!state.roomNightMode;renderRoom3DScene();sfx.pop();};
+
+function setActiveCamPreset(activeId){
+ ['cam-left-btn','cam-center-btn','cam-right-btn'].forEach(id=>{
+  const el=$(id);
+  if(el)el.classList.toggle('active',id===activeId);
+ });
+}
+$('cam-left-btn').onclick=()=>{
+ state.roomCam={panX:115,panY:8,zoom:1.18};
+ $('cam-tilt-btn').classList.remove('active');
+ setActiveCamPreset('cam-left-btn');
+ updateRoom3DCamera();
+ sfx.pop();
+};
+$('cam-center-btn').onclick=()=>{
+ state.roomCam={panX:0,panY:0,zoom:1};
+ $('cam-tilt-btn').classList.remove('active');
+ setActiveCamPreset('cam-center-btn');
+ updateRoom3DCamera();
+ sfx.pop();
+};
+$('cam-right-btn').onclick=()=>{
+ state.roomCam={panX:-115,panY:8,zoom:1.18};
+ $('cam-tilt-btn').classList.remove('active');
+ setActiveCamPreset('cam-right-btn');
+ updateRoom3DCamera();
+ sfx.pop();
+};
+$('cam-tilt-btn').onclick=()=>{
+ const zoomed=(state.roomCam.zoom||1)>1.05;
+ state.roomCam={panX:0,panY:zoomed?0:12,zoom:zoomed?1:1.22};
+ $('cam-tilt-btn').classList.toggle('active',!zoomed);
+ setActiveCamPreset('cam-center-btn');
+ updateRoom3DCamera();
+ sfx.pop();
+};
+$('cam-theme-day-btn').onclick=()=>{setRoomLightingTheme('day');sfx.pop();};
+$('cam-theme-sunset-btn').onclick=()=>{setRoomLightingTheme('sunset');sfx.pop();};
+$('cam-lighting-btn').onclick=()=>{setRoomLightingTheme('night');sfx.pop();};
 
 (function initRoom3DDrag(){
  const vp=$('room3d-viewport');
- let dragging=false,startX=0,startY=0,baseRy=0,baseRx=5;
+ let dragging=false,startX=0,startY=0,basePanX=0,basePanY=0;
  vp.addEventListener('pointerdown',e=>{
   if(e.target.closest('.room3d-item')||e.target.closest('.room3d-buddy'))return;
-  dragging=true;startX=e.clientX;startY=e.clientY;baseRy=state.roomCam.ry;baseRx=state.roomCam.rx;
+  dragging=true;startX=e.clientX;startY=e.clientY;
+  basePanX=state.roomCam.panX||0;basePanY=state.roomCam.panY||0;
  });
  window.addEventListener('pointermove',e=>{
   if(!dragging)return;
   const dx=e.clientX-startX;
   const dy=e.clientY-startY;
-  state.roomCam.ry=Math.max(-32,Math.min(32,baseRy+dx*0.16));
-  state.roomCam.rx=Math.max(-4,Math.min(22,baseRx-dy*0.12));
+  state.roomCam.panX=Math.max(-150,Math.min(150,basePanX+dx*0.65));
+  state.roomCam.panY=Math.max(-45,Math.min(45,basePanY+dy*0.45));
+  setActiveCamPreset('');
   updateRoom3DCamera();
  });
  window.addEventListener('pointerup',()=>{dragging=false;});
